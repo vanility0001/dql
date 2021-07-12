@@ -20,7 +20,9 @@ while True:
     try:
         cmd = input("dql > ")
         parsed = parse(cmd)
-        requesting.requester.send(parsed)
+
+        if cmd.upper() != "HELP":
+            requesting.requester.send(parsed)
 
     except (KeyboardInterrupt, ParseError, Exception) as err:
         if isinstance(err, KeyboardInterrupt):
