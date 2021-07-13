@@ -39,8 +39,7 @@ def parse(query: str) -> Union[Tuple[str, str, dict], None]:
 
     # CREATE keyword handler
     if q[0].upper() == "CREATE":
-        print(q)
-
+ 
         # Checking if the Discord TYPE exists in query
         if 2 > len(q):
             raise ParseError("Missing Discord TYPE.")
@@ -48,6 +47,7 @@ def parse(query: str) -> Union[Tuple[str, str, dict], None]:
         if q[1].upper() == "GUILD":
             # Redefining the split so that we can load
             q = query.split(maxsplit=4)
+            # Defining method & 
             method = "POST"
             url = base + "guilds"
 
@@ -74,9 +74,7 @@ def parse(query: str) -> Union[Tuple[str, str, dict], None]:
                 if isinstance(err, IndexError):
                     raise ParseError("Options for CREATE query were not provided.")
                 else:
-                    raise ParseError(f"Unknown error. Exception: \n {err}")
-
-            print(q)
+                    raise Exception(f"Unknown error. Exception: \n {err}")
 
         # HELP keyword handler
         elif q[0].upper() == "HELP":
