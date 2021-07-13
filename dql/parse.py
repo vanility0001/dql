@@ -47,7 +47,7 @@ def parse(query: str) -> Union[Tuple[str, str, dict], None]:
         if q[1].upper() == "GUILD":
             # Redefining the split so that we can load
             q = query.split(maxsplit=4)
-            # Defining method & 
+            # Defining method & URL
             method = "POST"
             url = base + "guilds"
 
