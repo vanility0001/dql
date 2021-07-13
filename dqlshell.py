@@ -3,7 +3,6 @@ import ctypes
 from dql.parse import parse
 from dql.errors import ParseError
 import sys
-import requesting.requester
 
 ctypes.windll.kernel32.SetConsoleTitleW("DQL Shell")
 
@@ -21,12 +20,15 @@ while True:
         cmd = input("dql > ")
         parsed = parse(cmd)
 
-        if cmd.upper() != "HELP":
-            requesting.requester.send(parsed)
+        if cmd.upper() == "HELP":
+            print("You are using dql, the command-line interface for using the Discord API.")
+        else:
+            parsed = parse(cmd)
+        pass
 
     except (KeyboardInterrupt, ParseError, Exception) as err:
         if isinstance(err, KeyboardInterrupt):
-            ans = input("\nAre you sure you want to quit? (y/n) ")
+            ans = input("\nAre you sure you want to quit? (Y/n) ")
 
             if ans.lower() == "y":
                 os.system("cls")

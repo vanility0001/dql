@@ -78,7 +78,6 @@ def parse(query: str) -> Union[Tuple[str, str, dict], None]:
 
         # HELP keyword handler
         elif q[0].upper() == "HELP":
-            print("You are using dql, the command-line interface for using the Discord API.")
             return
 
         # Returning a tuple that fits the query
