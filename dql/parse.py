@@ -31,20 +31,20 @@ def parse(query: str) -> Union[Tuple[str, str, dict], None]:
         raise ParseError("You must supply a query.")
 
     # Splitting the query into a list
-    q = query.split()
+    q = [i.upper() for i in query.split()]
 
     # Checking if the first word is a valid keyword
-    if q[0].upper() not in KEYWORDS:
+    if q[0] not in KEYWORDS:
         raise ParseError("The first word is not a valid keyword.")
 
     # CREATE keyword handler
-    if q[0].upper() == "CREATE":
+    if q[0] == "CREATE":
  
         # Checking if the Discord TYPE exists in query
         if 2 > len(q):
             raise ParseError("Missing Discord TYPE.")
 
-        if q[1].upper() == "GUILD":
+        if q[1] == "GUILD":
             # Redefining the split so that we can load
             q = query.split(maxsplit=4)
             # Defining method & URL
@@ -56,7 +56,7 @@ def parse(query: str) -> Union[Tuple[str, str, dict], None]:
                 raise ParseError("Missing WHERE keyword.")
 
             # Checking if the 3rd word in the query is a WHERE keyword
-            if q[2].upper() != "WHERE":
+            if q[2] != "WHERE":
                 raise ParseError("No WHERE keyword in CREATE query.")
 
             # Checking if the OPTIONS keyword exists in query
@@ -64,7 +64,7 @@ def parse(query: str) -> Union[Tuple[str, str, dict], None]:
                 raise ParseError("Missing OPTIONS keyword")
 
             # Checking if the 4th word in the query is a OPTIONS keyword
-            if q[3].upper() != "OPTIONS":
+            if q[3] != "OPTIONS":
                 raise ParseError("No OPTIONS keyword in CREATE query.")
 
             # Converting options into dictionary
@@ -77,7 +77,7 @@ def parse(query: str) -> Union[Tuple[str, str, dict], None]:
                     raise Exception(f"Unknown error. Exception: \n {err}")
 
         # HELP keyword handler
-        elif q[0].upper() == "HELP":
+        elif q[0] == "HELP":
             return
 
         # Returning a tuple that fits the query
